@@ -38,9 +38,9 @@ export default hopeTheme({
   
       GitHub: "https://github.com/tommmmya",
  
-      QQ: "https://tommmmya.github.io/Tommmy-Blog/",
+      QQ: "https://tommmmya.github.io/Tommya-Blog/",
    
-      Wechat: "https://tommmmya.github.io/Tommmy-Blog/",
+      Wechat: "https://tommmmya.github.io/Tommya-Blog/",
 
  
   
