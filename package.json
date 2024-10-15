@@ -1,0 +1,20 @@
+{
+  "name": "Tommya-blog",
+  "version": "2.0.0",
+  "description": "my-blog",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "vuepress-vite build src",
+    "clean-dev": "vuepress-vite dev src --clean-cache",
+    "dev": "vuepress-vite dev src",
+    "update-package": "npx vp-update"
+  },
+  "devDependencies": {
+    "@vuepress/bundler-vite": "2.0.0-rc.15",
+    "sass": "^1.77.8",
+    "vue": "^3.4.38",
+    "vuepress": "2.0.0-rc.15",
+    "vuepress-theme-hope": "2.0.0-rc.52"
+  }
+}
