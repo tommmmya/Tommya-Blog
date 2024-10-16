@@ -3,10 +3,10 @@ home: true
 layout: BlogHome
 icon: home
 title: Tommya
-heroImage: https://mp-b74a8f22-47b8-4567-8e02-57b47e66c25c.cdn.bspapp.com/image/favicon.ico
+heroImage: https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oYAY8xIgCGAemDslAG9dKEb7AvnoACAQsAflIl~tplv-dy-aweme-images-v2:3000:3000:q75.webp?biz_tag=aweme_images&from=327834062&s=PackSourceEnum_SEARCH&sc=image&se=false&x-expires=1730062800&x-signature=QYxUFQHkgXKuL0lJQwt9eHcKxP4%3D
 heroText: Tommya Blog
 heroFullScreen: true
-tagline: 走着走着天就亮了
+tagline: 红日挂枝头，再谈来时路
 projects:
   # - icon: project
   #   name: 项目名称
