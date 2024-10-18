@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-rc.15" />
+    <meta name="theme" content="VuePress Theme Hope 2.0.0-rc.52" />
+    <style>
+      html {
+        background: var(--bg-color, #fff);
+      }
+
+      html[data-theme="dark"] {
+        background: var(--bg-color, #1d1e1f);
+      }
+
+      body {
+        background: var(--bg-color);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem("vuepress-theme-hope-scheme");
+      const systemDarkMode =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+      if (userMode === "dark" || (userMode !== "light" && systemDarkMode)) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    </script>
+    <meta property="og:url" content="https://github.com/tommmmya/Tommya-Blog/study/3.Vue/vue3.0%E5%92%8C%202.0%E7%9A%84%E5%8C%BA%E5%88%AB.html"><meta property="og:site_name" content="Tommya 个人博客"><meta property="og:title" content="vue2 和 vue3区别"><meta property="og:description" content="vue2 和 vue3区别 生命周期的变化 整体来看，变化不大，只是名字大部分需要 + on，功能上类似。使用上 Vue3 组合式 API 需要先引入；Vue2 选项 API 则可直接调用，如下所示。 常用生命周期表格如下所示。 Tips： setup是围绕beforeCreate和created生命周期钩子运行的，所以不需要显式地去定义。 多根节点 ..."><meta property="og:type" content="article"><meta property="og:locale" content="zh-CN"><meta property="og:updated_time" content="2024-10-18T02:23:55.000Z"><meta property="article:author" content="Mr.Tommya"><meta property="article:tag" content="vue"><meta property="article:tag" content="vue2"><meta property="article:tag" content="vue3"><meta property="article:published_time" content="2022-01-11T00:00:00.000Z"><meta property="article:modified_time" content="2024-10-18T02:23:55.000Z"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"vue2 和 vue3区别","image":[""],"datePublished":"2022-01-11T00:00:00.000Z","dateModified":"2024-10-18T02:23:55.000Z","author":[{"@type":"Person","name":"Mr.Tommya","url":"https://github.com/tommmmya"}]}</script><title>vue2 和 vue3区别 | Tommya 个人博客</title><meta name="description" content="vue2 和 vue3区别 生命周期的变化 整体来看，变化不大，只是名字大部分需要 + on，功能上类似。使用上 Vue3 组合式 API 需要先引入；Vue2 选项 API 则可直接调用，如下所示。 常用生命周期表格如下所示。 Tips： setup是围绕beforeCreate和created生命周期钩子运行的，所以不需要显式地去定义。 多根节点 ...">
+    <link rel="preload" href="/Tommya-Blog/assets/style-ffDMQ4dE.css" as="style"><link rel="stylesheet" href="/Tommya-Blog/assets/style-ffDMQ4dE.css">
+    <link rel="modulepreload" href="/Tommya-Blog/assets/app-hlFOVmMU.js"><link rel="modulepreload" href="/Tommya-Blog/assets/vue3.0和 2.0的区别.html-BGIbBCGU.js"><link rel="modulepreload" href="/Tommya-Blog/assets/plugin-vue_export-helper-DlAUqK2U.js">
+    <link rel="prefetch" href="/Tommya-Blog/assets/index.html-C3fYNPK0.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-ty8nr9tY.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/intro.html-DiR_aaf4.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BnNV71CM.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/git工作流.html-YLoNexPG.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/常用Git指令.html-vjR9HLuy.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/如何使用腾讯云函数.html-o8PxEg15.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/vite和webpack.html-vy_Te1Zm.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/websocket原理.html-vQLWGoru.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/微前端的实现方案.html-B1_El9Do.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/白屏检测和修复.html-CAUIBWnf.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/虚拟列表的实现.html-CmZ0FQTN.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/学习Webpack5.html-CUoxT5tZ.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/GET和POST的区别.html-Cip8z4gx.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/Generator.html-Du-8J4Wf.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/JS事件循环机制.html-COEk6e_K.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/事件流机制冒泡捕获及事件代理.html-DO1EMukT.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/从JS中的内存管理说起JS中的弱引用.html-DAA4NL8K.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/使用Ref还是Reactive.html-Cj4KhXYe.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/如何写出一个惊艳面试官的深拷贝.html-CK907c9q.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/懒加载的原理及实现.html-CFSlgvm1.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/有了for循环为什么还要forEach.html-B3rOW6S-.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/浏览器事件机制详解.html-DHWAuHuQ.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/深入理解watch和watchEffect的区别与应用.html-fRxSV_-J.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/网络请求的状态码大全.html-C-gU-T0c.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/网页图片加载优化方法总结.html-DIaO4jEq.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/解决跨域的几种办法.html-Ck54BEa8.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/Vue.use做了什么.html-CrLStjsh.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/Vue2和Vue3的响应式原理比对.html-D0V_kyeP.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/Vue3自定义指令.html-BLS2XOH0.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/pinia和vue区别.html-BrHEb-zZ.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/ref和reactive的区别.html-BP7AM_Jo.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/this._set()介绍.html-qnanaskJ.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/vue2-vue3响应式原理.html-Bl3DJ8vP.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/vue3组件通信.html-wza3Px2G.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/vue中的路由守卫(导航守卫).html-BT9xHJU5.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/vue动态组件详解_.html-D-fWSi1d.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/了解前端路由hash与history差异.html-l0-q9ncU.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/谈谈我对nextTick的理解.html-ByzN2h1F.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/Node_express文件上传.html-BDZVTJf_.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/Node.js使用Nodemailer发送邮件.html-BTYUTh1r.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/express中req.body为空的问题.html-BcfFxWmY.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/express创建静态目录.html-DQ2KeKy9.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/nodejs中的bcryptjs密码加密.html-BxqJF41g.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/使用TS来编写express服务器简书.html-BUguzKV2.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/大文件上传优化切片断点续传秒传前后端demo.html-CgGZBMBN.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/HTTP1.0HTTP1.1HTTP2.0主要特性对比.html-zxaw3IOw.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/HTTP与HTTPS的区别.html-DaNpIQF9.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/前端缓存详解.html-gmppoTWt.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/服务端渲染与客户端渲染的区别（优缺点）_服务端渲染优缺点.html-BWcaCA-H.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/浏览器如何渲染页面.html-pitl6yYB.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/浏览器输入URL后发生了什么.html-mhV8AtaB.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/VUE3_VITE封装插件_发布到npm.html-C0qO9mft.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/前端设计模式.html-UN14KCM0.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/JavaScript中的数组方法总结详解.html-Dps6LMYT.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/Promise.html-DsvC4Vvw.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/defer和async什么区别.html-D9MozYYb.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/事件委托.html-DXg2enM7.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/你理解了for-in和for-of吗.html-DzEBdV2f.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/内存泄漏及排查详解.html-C3g2EvZg.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/实现数组去重的方式(7种).html-DDjl7LJo.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/暂时性死区.html-DTk1q0do.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/箭头函数和普通函数的区别.html-yZARm-IJ.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/详解JS中的Object.html-aLRWZA8T.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/详解js中的浅拷贝与深拷贝.html-Bhx_qiiC.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/闭包.html-iAqIYLm8.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/css1.html-DZvnDUL1.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/css2.html-DzpHcg2b.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/css3.html-DyReXp2U.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/404.html-D8o1fmLQ.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-D0uGG-cX.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BueiEO0T.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-sHL_xw9C.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CPW10c6n.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-COv__xl4.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BFNUvr7n.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BvElf4qh.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BT2kLSzi.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-C49Q4cbz.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CadojJHV.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-DpaeXKnY.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-S4-wjD_H.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-6LNTttAt.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-D84v5hBk.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-kJgsXzQ6.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-22jQ5S4t.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CzJNMLgz.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CkNjz_nc.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CO6EN1mp.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-Lj05BGsk.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CmlT6jv9.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BSuX2EjM.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-B9CUc8KC.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CbtEFi1T.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-C7E1qDau.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CFBtWyLb.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BG99hE4v.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CBhyW7r0.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CfGzhN0T.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-fzdL-B_f.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-B0qMR2LA.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BovWi_LU.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BKGfQcNu.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-DxpAtk0u.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-Dozi1-Ui.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CDP_aiVi.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-C-YmtnHV.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-JUQ3Crkp.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-D0g3Ngkd.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BL5zpLO3.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-DHPoRXjW.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-DMJGcgH9.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-Dybp8Zrt.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-Cimm1D9B.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-O_lC8qBM.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CI_0SRBp.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CrrMxKD2.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CfGzhN0T.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-Bml3QZ16.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BoT-ylYM.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CfGzhN0T.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CCl_N49T.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BqcNF6-e.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BDdAZkC0.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-ZOaIEsh6.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-DeSvDb0z.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-j2QdsmA0.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-bZnciRHn.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BiqDTfKc.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CtZpr6Tp.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-Z-GyIbg1.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BOpp795u.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-Dced667R.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-C8QmaIy_.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-iDW7kIiN.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-C_OYfACV.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-Cc2NJ59J.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BTOTLK4v.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-6HlFvvTr.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-gSsRB1dH.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-sQXlPJBe.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-D0_HIeac.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-Xg1nsGyo.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BlA90h3K.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-QLyKI2gQ.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-B7lsWm2O.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-gqjkKmwN.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-Ci0T0QoM.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-B6tKK01m.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-j2QdsmA0.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-DxkfTXgZ.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-DpSxaA9J.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-DShSxV-w.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-C6fFmf2A.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-lpGEYjym.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CLsiC4yt.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CiMJPbpG.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-rTXzkiAd.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-DZskWgG1.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-DTsGUZaH.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-Bs_xUlqZ.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-DJJewdQq.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-Dr9HNZgv.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BNaF3WQ0.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-D5T7jCaC.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-rDtFp2rc.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-xBAtEA_u.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BQ1OAcP1.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CkDXYh6f.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-B0ALhwvX.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-a7pbNGGR.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-B0qMR2LA.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BlA90h3K.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-WF2QjyAk.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-ZAi6rcL-.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BFeZvbHy.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-B_jlgVtE.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CmRN-vqu.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-Bx8L9XVC.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BfcpeeP0.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-B8e73v1-.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-3QliEAjD.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-rveaO7L_.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-DsDGWQEc.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CGUMcdIy.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CwpP3Skt.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-Bgh41uUC.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-lrBb52Ni.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-AYcyCZuA.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-CMm8xiSL.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-Croqy_a0.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-DMJiIuxL.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-BOzVDSjK.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-VjgF7SMT.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-B0YSfXlI.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-ceVnbNRP.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-B30WmKla.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-D7bAktdP.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-C2RF5L_J.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/index.html-SknX8jjn.js" as="script"><link rel="prefetch" href="/Tommya-Blog/assets/photoswipe.esm-GXRgw7eJ.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!--[--><!--[--><!--[--><span tabindex="-1"></span><a href="#main-content" class="vp-skip-link sr-only">跳至主要內容</a><!--]--><div class="theme-container external-link-icon has-toc"><!--[--><header id="navbar" class="vp-navbar"><div class="vp-navbar-start"><button type="button" class="vp-toggle-sidebar-button" title="Toggle Sidebar"><span class="icon"></span></button><!----><!--[--><a class="route-link vp-brand" href="/Tommya-Blog/"><img class="vp-nav-logo" src="https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oYAY8xIgCGAemDslAG9dKEb7AvnoACAQsAflIl~tplv-dy-aweme-images-v2:3000:3000:q75.webp?biz_tag=aweme_images&amp;from=327834062&amp;s=PackSourceEnum_SEARCH&amp;sc=image&amp;se=false&amp;x-expires=1730062800&amp;x-signature=QYxUFQHkgXKuL0lJQwt9eHcKxP4%3D" alt><!----><span class="vp-site-name hide-in-pad">Tommya 个人博客</span></a><!--]--><!----></div><div class="vp-navbar-center"><!----><!--[--><nav class="vp-nav-links"><div class="vp-nav-item hide-in-mobile"><a class="route-link auto-link" href="/Tommya-Blog/" aria-label="Tommya"><!--[--><span class="font-icon icon fa-fw fa-sm fas fa-home" style=""></span><!--]-->Tommya<!----></a></div><div class="vp-nav-item hide-in-mobile"><a class="route-link route-link-active auto-link" href="/Tommya-Blog/study/" aria-label="技术文档"><!--[--><span class="font-icon icon fa-fw fa-sm fas fa-laptop-code" style=""></span><!--]-->技术文档<!----></a></div><div class="vp-nav-item hide-in-mobile"><a class="route-link auto-link" href="/Tommya-Blog/about/" aria-label="关于我"><!--[--><span class="font-icon icon fa-fw fa-sm fas fa-circle-info" style=""></span><!--]-->关于我<!----></a></div></nav><!--]--><!----></div><div class="vp-navbar-end"><!----><!--[--><!----><div class="vp-nav-item vp-action"><a class="vp-action-link" href="https://github.com/tommmmya/" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" class="icon github-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="github icon" name="github" style="width:1.25rem;height:1.25rem;vertical-align:middle;"><path d="M511.957 21.333C241.024 21.333 21.333 240.981 21.333 512c0 216.832 140.544 400.725 335.574 465.664 24.49 4.395 32.256-10.07 32.256-23.083 0-11.69.256-44.245 0-85.205-136.448 29.61-164.736-64.64-164.736-64.64-22.315-56.704-54.4-71.765-54.4-71.765-44.587-30.464 3.285-29.824 3.285-29.824 49.195 3.413 75.179 50.517 75.179 50.517 43.776 75.008 114.816 53.333 142.762 40.79 4.523-31.66 17.152-53.377 31.19-65.537-108.971-12.458-223.488-54.485-223.488-242.602 0-53.547 19.114-97.323 50.517-131.67-5.035-12.33-21.93-62.293 4.779-129.834 0 0 41.258-13.184 134.912 50.346a469.803 469.803 0 0 1 122.88-16.554c41.642.213 83.626 5.632 122.88 16.554 93.653-63.488 134.784-50.346 134.784-50.346 26.752 67.541 9.898 117.504 4.864 129.834 31.402 34.347 50.474 78.123 50.474 131.67 0 188.586-114.73 230.016-224.042 242.09 17.578 15.232 33.578 44.672 33.578 90.454v135.85c0 13.142 7.936 27.606 32.854 22.87C862.25 912.597 1002.667 728.747 1002.667 512c0-271.019-219.648-490.667-490.71-490.667z"></path></svg></a></div><div class="vp-nav-item hide-in-mobile"><button type="button" class="vp-color-mode-switch" id="color-mode-switch"><svg xmlns="http://www.w3.org/2000/svg" class="icon auto-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="auto icon" name="auto" style="display:block;"><path d="M512 992C246.92 992 32 777.08 32 512S246.92 32 512 32s480 214.92 480 480-214.92 480-480 480zm0-840c-198.78 0-360 161.22-360 360 0 198.84 161.22 360 360 360s360-161.16 360-360c0-198.78-161.22-360-360-360zm0 660V212c165.72 0 300 134.34 300 300 0 165.72-134.28 300-300 300z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon dark-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="dark icon" name="dark" style="display:none;"><path d="M524.8 938.667h-4.267a439.893 439.893 0 0 1-313.173-134.4 446.293 446.293 0 0 1-11.093-597.334A432.213 432.213 0 0 1 366.933 90.027a42.667 42.667 0 0 1 45.227 9.386 42.667 42.667 0 0 1 10.24 42.667 358.4 358.4 0 0 0 82.773 375.893 361.387 361.387 0 0 0 376.747 82.774 42.667 42.667 0 0 1 54.187 55.04 433.493 433.493 0 0 1-99.84 154.88 438.613 438.613 0 0 1-311.467 128z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon light-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="light icon" name="light" style="display:none;"><path d="M952 552h-80a40 40 0 0 1 0-80h80a40 40 0 0 1 0 80zM801.88 280.08a41 41 0 0 1-57.96-57.96l57.96-58a41.04 41.04 0 0 1 58 58l-58 57.96zM512 752a240 240 0 1 1 0-480 240 240 0 0 1 0 480zm0-560a40 40 0 0 1-40-40V72a40 40 0 0 1 80 0v80a40 40 0 0 1-40 40zm-289.88 88.08-58-57.96a41.04 41.04 0 0 1 58-58l57.96 58a41 41 0 0 1-57.96 57.96zM192 512a40 40 0 0 1-40 40H72a40 40 0 0 1 0-80h80a40 40 0 0 1 40 40zm30.12 231.92a41 41 0 0 1 57.96 57.96l-57.96 58a41.04 41.04 0 0 1-58-58l58-57.96zM512 832a40 40 0 0 1 40 40v80a40 40 0 0 1-80 0v-80a40 40 0 0 1 40-40zm289.88-88.08 58 57.96a41.04 41.04 0 0 1-58 58l-57.96-58a41 41 0 0 1 57.96-57.96z"></path></svg></button></div><!----><!--]--><!----><button type="button" class="vp-toggle-navbar-button" aria-label="Toggle Navbar" aria-expanded="false" aria-controls="nav-screen"><span><span class="vp-top"></span><span class="vp-middle"></span><span class="vp-bottom"></span></span></button></div></header><!----><!--]--><!----><div class="toggle-sidebar-wrapper"><span class="arrow start"></span></div><aside id="sidebar" class="vp-sidebar"><!----><ul class="vp-sidebar-links"><li><section class="vp-sidebar-group"><p class="vp-sidebar-header active"><span class="font-icon icon fa-fw fa-sm fas fa-book" style=""></span><span class="vp-sidebar-title">知识点</span><!----></p><ul class="vp-sidebar-links"><li><section class="vp-sidebar-group"><button class="vp-sidebar-header clickable" type="button"><!----><span class="vp-sidebar-title">1.面试实录</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-header clickable" type="button"><!----><span class="vp-sidebar-title">2.深入必备</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-header clickable active" type="button"><!----><span class="vp-sidebar-title">3. Vue</span><span class="vp-arrow down"></span></button><ul class="vp-sidebar-links"><li><a class="route-link auto-link vp-sidebar-link" href="/Tommya-Blog/study/3.Vue/vue%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6%E8%AF%A6%E8%A7%A3_.html" aria-label="动态组件详解"><!--[--><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span><!--]-->动态组件详解<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/Tommya-Blog/study/3.Vue/vue%E4%B8%AD%E7%9A%84%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB(%E5%AF%BC%E8%88%AA%E5%AE%88%E5%8D%AB).html" aria-label="路由守卫详解"><!--[--><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span><!--]-->路由守卫详解<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/Tommya-Blog/study/3.Vue/%E4%BA%86%E8%A7%A3%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1hash%E4%B8%8Ehistory%E5%B7%AE%E5%BC%82.html" aria-label="深入了解前端路由 hash 与 history 差异"><!--[--><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span><!--]-->深入了解前端路由 hash 与 history 差异<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/Tommya-Blog/study/3.Vue/Vue3%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4.html" aria-label="自定义指令，权限按钮实现"><!--[--><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span><!--]-->自定义指令，权限按钮实现<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/Tommya-Blog/study/3.Vue/%E8%B0%88%E8%B0%88%E6%88%91%E5%AF%B9nextTick%E7%9A%84%E7%90%86%E8%A7%A3.html" aria-label="nextTick"><!--[--><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span><!--]-->nextTick<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/Tommya-Blog/study/3.Vue/pinia%E5%92%8Cvue%E5%8C%BA%E5%88%AB.html" aria-label="pinia 和 vuex 的区别"><!--[--><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span><!--]-->pinia 和 vuex 的区别<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/Tommya-Blog/study/3.Vue/ref%E5%92%8Creactive%E7%9A%84%E5%8C%BA%E5%88%AB.html" aria-label="ref 和 reactive 的区别"><!--[--><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span><!--]-->ref 和 reactive 的区别<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/Tommya-Blog/study/3.Vue/this._set()%E4%BB%8B%E7%BB%8D.html" aria-label="this.$set()介绍"><!--[--><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span><!--]-->this.$set()介绍<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/Tommya-Blog/study/3.Vue/Vue.use%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88.html" aria-label="Vue.use()详解"><!--[--><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span><!--]-->Vue.use()详解<!----></a></li><li><a class="route-link route-link-active auto-link vp-sidebar-link active" href="/Tommya-Blog/study/3.Vue/vue3.0%E5%92%8C%202.0%E7%9A%84%E5%8C%BA%E5%88%AB.html" aria-label="vue2 和 vue3区别"><!--[--><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span><!--]-->vue2 和 vue3区别<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/Tommya-Blog/study/3.Vue/vue2-vue3%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86.html" aria-label="vue2 和 vue3响应式原理区别"><!--[--><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span><!--]-->vue2 和 vue3响应式原理区别<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/Tommya-Blog/study/3.Vue/Vue2%E5%92%8CVue3%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86%E6%AF%94%E5%AF%B9.html" aria-label="Vue2和Vue3的响应式原理比对"><!--[--><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span><!--]-->Vue2和Vue3的响应式原理比对<!----></a></li><li><a class="route-link auto-link vp-sidebar-link" href="/Tommya-Blog/study/3.Vue/vue3%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1.html" aria-label="vue3组件通信"><!--[--><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span><!--]-->vue3组件通信<!----></a></li></ul></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-header clickable" type="button"><!----><span class="vp-sidebar-title">4.笔记</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-header clickable" type="button"><!----><span class="vp-sidebar-title">5.计算机网络</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-header clickable" type="button"><!----><span class="vp-sidebar-title">6.进阶教程</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-header clickable" type="button"><!----><span class="vp-sidebar-title">7. Javascript</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-header clickable" type="button"><!----><span class="vp-sidebar-title">8.设计模式</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-header clickable" type="button"><!----><span class="vp-sidebar-title">9. CSS</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-header clickable" type="button"><!----><span class="vp-sidebar-title">10.git</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-header clickable" type="button"><!----><span class="vp-sidebar-title">11.uniapp</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-header clickable" type="button"><!----><span class="vp-sidebar-title">12.webpack</span><span class="vp-arrow end"></span></button><!----></section></li></ul></section></li></ul><!----></aside><!--[--><main id="main-content" class="vp-page"><!--[--><!----><!----><nav class="vp-breadcrumb disable"></nav><div class="vp-page-title"><h1><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span>vue2 和 vue3区别</h1><div class="page-info"><span class="page-author-info" aria-label="作者🖊" data-balloon-pos="up"><svg xmlns="http://www.w3.org/2000/svg" class="icon author-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="author icon" name="author"><path d="M649.6 633.6c86.4-48 147.2-144 147.2-249.6 0-160-128-288-288-288s-288 128-288 288c0 108.8 57.6 201.6 147.2 249.6-121.6 48-214.4 153.6-240 288-3.2 9.6 0 19.2 6.4 25.6 3.2 9.6 12.8 12.8 22.4 12.8h704c9.6 0 19.2-3.2 25.6-12.8 6.4-6.4 9.6-16 6.4-25.6-25.6-134.4-121.6-240-243.2-288z"></path></svg><span><a class="page-author-item" href="https://github.com/tommmmya" target="_blank" rel="noopener noreferrer">Mr.Tommya</a></span><span property="author" content="Mr.Tommya"></span></span><!----><span class="page-date-info" aria-label="写作日期📅" data-balloon-pos="up"><svg xmlns="http://www.w3.org/2000/svg" class="icon calendar-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="calendar icon" name="calendar"><path d="M716.4 110.137c0-18.753-14.72-33.473-33.472-33.473-18.753 0-33.473 14.72-33.473 33.473v33.473h66.993v-33.473zm-334.87 0c0-18.753-14.72-33.473-33.473-33.473s-33.52 14.72-33.52 33.473v33.473h66.993v-33.473zm468.81 33.52H716.4v100.465c0 18.753-14.72 33.473-33.472 33.473a33.145 33.145 0 01-33.473-33.473V143.657H381.53v100.465c0 18.753-14.72 33.473-33.473 33.473a33.145 33.145 0 01-33.473-33.473V143.657H180.6A134.314 134.314 0 0046.66 277.595v535.756A134.314 134.314 0 00180.6 947.289h669.74a134.36 134.36 0 00133.94-133.938V277.595a134.314 134.314 0 00-133.94-133.938zm33.473 267.877H147.126a33.145 33.145 0 01-33.473-33.473c0-18.752 14.72-33.473 33.473-33.473h736.687c18.752 0 33.472 14.72 33.472 33.473a33.145 33.145 0 01-33.472 33.473z"></path></svg><span><!----></span><meta property="datePublished" content="2022-01-11T00:00:00.000Z"></span><!----><span class="page-reading-time-info" aria-label="阅读时间⌛" data-balloon-pos="up"><svg xmlns="http://www.w3.org/2000/svg" class="icon timer-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="timer icon" name="timer"><path d="M799.387 122.15c4.402-2.978 7.38-7.897 7.38-13.463v-1.165c0-8.933-7.38-16.312-16.312-16.312H256.33c-8.933 0-16.311 7.38-16.311 16.312v1.165c0 5.825 2.977 10.874 7.637 13.592 4.143 194.44 97.22 354.963 220.201 392.763-122.204 37.542-214.893 196.511-220.2 389.397-4.661 5.049-7.638 11.651-7.638 19.03v5.825h566.49v-5.825c0-7.379-2.849-13.981-7.509-18.9-5.049-193.016-97.867-351.985-220.2-389.527 123.24-37.67 216.446-198.453 220.588-392.892zM531.16 450.445v352.632c117.674 1.553 211.787 40.778 211.787 88.676H304.097c0-48.286 95.149-87.382 213.728-88.676V450.445c-93.077-3.107-167.901-81.297-167.901-177.093 0-8.803 6.99-15.793 15.793-15.793 8.803 0 15.794 6.99 15.794 15.793 0 80.261 63.69 145.635 142.01 145.635s142.011-65.374 142.011-145.635c0-8.803 6.99-15.793 15.794-15.793s15.793 6.99 15.793 15.793c0 95.019-73.789 172.82-165.96 177.093z"></path></svg><span>大约 13 分钟</span><meta property="timeRequired" content="PT13M"></span><span class="page-category-info" aria-label="分类🌈" data-balloon-pos="up"><svg xmlns="http://www.w3.org/2000/svg" class="icon category-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="category icon" name="category"><path d="M148.41 106.992h282.176c22.263 0 40.31 18.048 40.31 40.31V429.48c0 22.263-18.047 40.31-40.31 40.31H148.41c-22.263 0-40.311-18.047-40.311-40.31V147.302c0-22.263 18.048-40.31 40.311-40.31zM147.556 553.478H429.73c22.263 0 40.311 18.048 40.311 40.31v282.176c0 22.263-18.048 40.312-40.31 40.312H147.555c-22.263 0-40.311-18.049-40.311-40.312V593.79c0-22.263 18.048-40.311 40.31-40.311zM593.927 106.992h282.176c22.263 0 40.31 18.048 40.31 40.31V429.48c0 22.263-18.047 40.31-40.31 40.31H593.927c-22.263 0-40.311-18.047-40.311-40.31V147.302c0-22.263 18.048-40.31 40.31-40.31zM730.22 920.502H623.926c-40.925 0-74.22-33.388-74.22-74.425V623.992c0-41.038 33.387-74.424 74.425-74.424h222.085c41.038 0 74.424 33.226 74.424 74.067v114.233c0 10.244-8.304 18.548-18.547 18.548s-18.548-8.304-18.548-18.548V623.635c0-20.388-16.746-36.974-37.33-36.974H624.13c-20.585 0-37.331 16.747-37.331 37.33v222.086c0 20.585 16.654 37.331 37.126 37.331H730.22c10.243 0 18.547 8.304 18.547 18.547 0 10.244-8.304 18.547-18.547 18.547z"></path></svg><!--[--><span class="page-category-item color1 clickable" role="navigation">Vue</span><!--]--><meta property="articleSection" content="Vue"></span><span class="page-tag-info" aria-label="标签🏷" data-balloon-pos="up"><svg xmlns="http://www.w3.org/2000/svg" class="icon tag-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="tag icon" name="tag"><path d="M939.902 458.563L910.17 144.567c-1.507-16.272-14.465-29.13-30.737-30.737L565.438 84.098h-.402c-3.215 0-5.726 1.005-7.634 2.913l-470.39 470.39a10.004 10.004 0 000 14.164l365.423 365.424c1.909 1.908 4.42 2.913 7.132 2.913s5.223-1.005 7.132-2.913l470.39-470.39c2.01-2.11 3.014-5.023 2.813-8.036zm-240.067-72.121c-35.458 0-64.286-28.828-64.286-64.286s28.828-64.285 64.286-64.285 64.286 28.828 64.286 64.285-28.829 64.286-64.286 64.286z"></path></svg><!--[--><span class="page-tag-item color6 clickable" role="navigation">vue</span><span class="page-tag-item color0 clickable" role="navigation">vue2</span><span class="page-tag-item color6 clickable" role="navigation">vue3</span><!--]--><meta property="keywords" content="vue,vue2,vue3"></span></div><hr></div><div class="vp-toc-placeholder"><aside id="toc"><!----><div class="vp-toc-header">此页内容<button type="button" class="print-button" title="打印"><svg xmlns="http://www.w3.org/2000/svg" class="icon print-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="print icon" name="print"><path d="M819.2 364.8h-44.8V128c0-17.067-14.933-32-32-32H281.6c-17.067 0-32 14.933-32 32v236.8h-44.8C145.067 364.8 96 413.867 96 473.6v192c0 59.733 49.067 108.8 108.8 108.8h44.8V896c0 17.067 14.933 32 32 32h460.8c17.067 0 32-14.933 32-32V774.4h44.8c59.733 0 108.8-49.067 108.8-108.8v-192c0-59.733-49.067-108.8-108.8-108.8zM313.6 160h396.8v204.8H313.6V160zm396.8 704H313.6V620.8h396.8V864zM864 665.6c0 25.6-19.2 44.8-44.8 44.8h-44.8V588.8c0-17.067-14.933-32-32-32H281.6c-17.067 0-32 14.933-32 32v121.6h-44.8c-25.6 0-44.8-19.2-44.8-44.8v-192c0-25.6 19.2-44.8 44.8-44.8h614.4c25.6 0 44.8 19.2 44.8 44.8v192z"></path></svg></button><div class="arrow end"></div></div><div class="vp-toc-wrapper"><ul class="vp-toc-list"><!--[--><li class="vp-toc-item"><a class="route-link vp-toc-link level3" href="#生命周期的变化">生命周期的变化</a></li><!----><!--]--><!--[--><li class="vp-toc-item"><a class="route-link vp-toc-link level3" href="#多根节点">多根节点</a></li><!----><!--]--><!--[--><li class="vp-toc-item"><a class="route-link vp-toc-link level3" href="#异步组件">异步组件</a></li><!----><!--]--><!--[--><li class="vp-toc-item"><a class="route-link vp-toc-link level3" href="#teleport">Teleport</a></li><!----><!--]--><!--[--><li class="vp-toc-item"><a class="route-link vp-toc-link level3" href="#组合式-api">组合式 API</a></li><!----><!--]--><!--[--><li class="vp-toc-item"><a class="route-link vp-toc-link level3" href="#响应式原理">响应式原理</a></li><!----><!--]--><!--[--><li class="vp-toc-item"><a class="route-link vp-toc-link level3" href="#虚拟-dom">虚拟 DOM</a></li><!----><!--]--><!--[--><li class="vp-toc-item"><a class="route-link vp-toc-link level3" href="#事件缓存">事件缓存</a></li><!----><!--]--><!--[--><li class="vp-toc-item"><a class="route-link vp-toc-link level3" href="#diff-优化">Diff 优化</a></li><!----><!--]--><!--[--><li class="vp-toc-item"><a class="route-link vp-toc-link level3" href="#打包优化">打包优化</a></li><!----><!--]--><!--[--><li class="vp-toc-item"><a class="route-link vp-toc-link level3" href="#自定义渲染-api">自定义渲染 API</a></li><!----><!--]--><!--[--><li class="vp-toc-item"><a class="route-link vp-toc-link level3" href="#typescript-支持">TypeScript 支持</a></li><!----><!--]--></ul><div class="vp-toc-marker" style="top:-1.7rem;"></div></div><!----></aside></div><!----><div class="theme-hope-content"><h1 id="vue2-和-vue3区别" tabindex="-1"><a class="header-anchor" href="#vue2-和-vue3区别"><span>vue2 和 vue3区别</span></a></h1><h3 id="生命周期的变化" tabindex="-1"><a class="header-anchor" href="#生命周期的变化"><span>生命周期的变化</span></a></h3><p>整体来看，变化不大，只是名字大部分需要 + <code>on</code>，功能上类似。使用上 Vue3 组合式 API 需要先引入；Vue2 选项 API 则可直接调用，如下所示。</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>// vue3</span></span>
+<span class="line"><span>&lt;script setup&gt;     </span></span>
+<span class="line"><span>import { onMounted } from  vue </span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>onMounted(() =&gt; {</span></span>
+<span class="line"><span>  ...</span></span>
+<span class="line"><span>})</span></span>
+<span class="line"><span>// 可将不同的逻辑拆开成多个onMounted，依然按顺序执行，不被覆盖</span></span>
+<span class="line"><span>onMounted(() =&gt; {</span></span>
+<span class="line"><span>  ...</span></span>
+<span class="line"><span>})</span></span>
+<span class="line"><span>&lt;/script&gt;</span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>// vue2</span></span>
+<span class="line"><span>&lt;script&gt;     </span></span>
+<span class="line"><span>   export default {         </span></span>
+<span class="line"><span>      mounted() {             </span></span>
+<span class="line"><span>        ...         </span></span>
+<span class="line"><span>      },           </span></span>
+<span class="line"><span>   }</span></span>
+<span class="line"><span>&lt;/script&gt; </span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>常用生命周期表格如下所示。</p><table><thead><tr><th>Vue2.x</th><th>Vue3</th></tr></thead><tbody><tr><td>beforeCreate</td><td>Not needed*</td></tr><tr><td>created</td><td>Not needed*</td></tr><tr><td>beforeMount</td><td>onBeforeMount</td></tr><tr><td>mounted</td><td>onMounted</td></tr><tr><td>beforeUpdate</td><td>onBeforeUpdate</td></tr><tr><td>updated</td><td>onUpdated</td></tr><tr><td>beforeDestroy</td><td>onBeforeUnmount</td></tr><tr><td>destroyed</td><td>onUnmounted</td></tr></tbody></table><p><strong>Tips：</strong> <code>setup</code>是围绕<code>beforeCreate</code>和<code>created</code>生命周期钩子运行的，所以不需要显式地去定义。</p><h3 id="多根节点" tabindex="-1"><a class="header-anchor" href="#多根节点"><span>多根节点</span></a></h3><p>Vue3 支持了多根节点组件，也就是<code>fragment</code>。</p><p>Vue2 中，编写页面的时候，我们需要去将组件包裹在<code>&lt;div&gt;</code>中，否则报错警告。</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>&lt;template&gt;</span></span>
+<span class="line"><span>  &lt;div&gt;</span></span>
+<span class="line"><span>    &lt;header&gt;...&lt;/header&gt;</span></span>
+<span class="line"><span>    &lt;main&gt;...&lt;/main&gt;</span></span>
+<span class="line"><span>    &lt;footer&gt;...&lt;/footer&gt;</span></span>
+<span class="line"><span>  &lt;/div&gt;</span></span>
+<span class="line"><span>&lt;/template&gt;</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Vue3，我们可以组件包含多个根节点，可以少写一层，niceeee ！</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>&lt;template&gt;</span></span>
+<span class="line"><span>  &lt;header&gt;...&lt;/header&gt;</span></span>
+<span class="line"><span>  &lt;main&gt;...&lt;/main&gt;</span></span>
+<span class="line"><span>  &lt;footer&gt;...&lt;/footer&gt;</span></span>
+<span class="line"><span>&lt;/template&gt;</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="异步组件" tabindex="-1"><a class="header-anchor" href="#异步组件"><span>异步组件</span></a></h3><p>Vue3 提供 <code>Suspense</code>组件，允许程序在等待异步组件时渲染兜底的内容，如 loading ，使用户体验更平滑。使用它，需在模板中声明，并包括两个命名插槽：<code>default</code>和<code>fallback</code>。<code>Suspense</code>确保加载完异步内容时显示默认插槽，并将<code>fallback</code>插槽用作加载状态。</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>&lt;tempalte&gt;</span></span>
+<span class="line"><span>   &lt;suspense&gt;</span></span>
+<span class="line"><span>     &lt;template #default&gt;</span></span>
+<span class="line"><span>       &lt;todo-list /&gt;</span></span>
+<span class="line"><span>     &lt;/template&gt;</span></span>
+<span class="line"><span>     &lt;template #fallback&gt;</span></span>
+<span class="line"><span>       &lt;div&gt;</span></span>
+<span class="line"><span>         Loading...</span></span>
+<span class="line"><span>       &lt;/div&gt;</span></span>
+<span class="line"><span>     &lt;/template&gt;</span></span>
+<span class="line"><span>   &lt;/suspense&gt;</span></span>
+<span class="line"><span>&lt;/template&gt;</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>真实的项目中踩过坑，若想在 setup 中调用异步请求，需在 setup 前加<code>async</code>关键字。这时，会受到警告<code>async setup() is used without a suspense boundary</code>。</p><p>解决方案：在父页面调用当前组件外包裹一层<code>Suspense</code>组件。</p><h3 id="teleport" tabindex="-1"><a class="header-anchor" href="#teleport"><span>Teleport</span></a></h3><p>Vue3 提供<code>Teleport</code>组件可将部分 DOM 移动到 Vue app 之外的位置。比如项目中常见的<code>Dialog</code>组件。</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>&lt;button @click=dialogVisible = true&gt;点击&lt;/button&gt;</span></span>
+<span class="line"><span>&lt;teleport to=body&gt;</span></span>
+<span class="line"><span>   &lt;div class=dialog v-if=dialogVisible&gt;</span></span>
+<span class="line"><span>   &lt;/div&gt;</span></span>
+<span class="line"><span>&lt;/teleport&gt;</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="组合式-api" tabindex="-1"><a class="header-anchor" href="#组合式-api"><span>组合式 API</span></a></h3><p>Vue2 是 <code>选项式API（Option API）</code>，一个逻辑会散乱在文件不同位置（data、props、computed、watch、生命周期函数等），导致代码的可读性变差，需要上下来回跳转文件位置。Vue3 <code>组合式API（Composition API）</code>则很好地解决了这个问题，可将同一逻辑的内容写到一起。</p><p>除了增强了代码的可读性、内聚性，组合式 API 还提供了较为完美的逻辑复用性方案，举个🌰，如下所示公用鼠标坐标案例。</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>// main.vue</span></span>
+<span class="line"><span>&lt;template&gt;</span></span>
+<span class="line"><span>  &lt;span&gt;mouse position {{x}} {{y}}&lt;/span&gt;</span></span>
+<span class="line"><span>&lt;/template&gt;</span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>&lt;script setup&gt;</span></span>
+<span class="line"><span>import { ref } from  vue </span></span>
+<span class="line"><span>import useMousePosition from  ./useMousePosition </span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>const {x, y} = useMousePosition()</span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>&lt;/script&gt;</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>// useMousePosition.js</span></span>
+<span class="line"><span>import { ref, onMounted, onUnmounted } from  vue </span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>function useMousePosition() {</span></span>
+<span class="line"><span>  let x = ref(0)</span></span>
+<span class="line"><span>  let y = ref(0)</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  function update(e) {</span></span>
+<span class="line"><span>    x.value = e.pageX</span></span>
+<span class="line"><span>    y.value = e.pageY</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  onMounted(() =&gt; {</span></span>
+<span class="line"><span>    window.addEventListener( mousemove , update)</span></span>
+<span class="line"><span>  })</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  onUnmounted(() =&gt; {</span></span>
+<span class="line"><span>    window.removeEventListener( mousemove , update)</span></span>
+<span class="line"><span>  })</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  return {</span></span>
+<span class="line"><span>    x,</span></span>
+<span class="line"><span>    y</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>&lt;/script&gt;</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>解决了 Vue2 <code>Mixin</code>的存在的命名冲突隐患，依赖关系不明确，不同组件间配置化使用不够灵活。</p><h3 id="响应式原理" tabindex="-1"><a class="header-anchor" href="#响应式原理"><span><a href="https://so.csdn.net/so/search?q=%E5%93%8D%E5%BA%94%E5%BC%8F&amp;spm=1001.2101.3001.7020" target="_blank" rel="noopener noreferrer">响应式</a>原理</span></a></h3><p>Vue2 响应式原理基础是<code>Object.defineProperty</code>；Vue3 响应式原理基础是<code>Proxy</code>。</p><p>Object.defineProperty</p><p>基本用法：直接在一个对象上定义新的属性或修改现有的属性，并返回对象。<br><strong>Tips：</strong> <code>writable</code> 和 <code>value</code> 与 <code>getter</code> 和 <code>setter</code> 不共存。</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>let obj = {}</span></span>
+<span class="line"><span>let name =  瑾行 </span></span>
+<span class="line"><span>Object.defineProperty(obj,  name , {</span></span>
+<span class="line"><span>  enumerable: true, // 可枚举（是否可通过for...in 或 Object.keys()进行访问）</span></span>
+<span class="line"><span>  configurable: true, // 可配置（是否可使用delete删除，是否可再次设置属性）</span></span>
+<span class="line"><span>  // value:   , // 任意类型的值，默认undefined</span></span>
+<span class="line"><span>  // writable: true, // 可重写</span></span>
+<span class="line"><span>  get: function() {</span></span>
+<span class="line"><span>    return name</span></span>
+<span class="line"><span>  },</span></span>
+<span class="line"><span>  set: function(value) {</span></span>
+<span class="line"><span>    name = value</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>})</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>搬运 Vue2 核心源码，略删减。</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>function defineReactive(obj, key, val) {</span></span>
+<span class="line"><span>  // 一 key 一个 dep</span></span>
+<span class="line"><span>  const dep = new Dep()</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  // 获取 key 的属性描述符，发现它是不可配置对象的话直接 return</span></span>
+<span class="line"><span>  const property = Object.getOwnPropertyDescriptor(obj, key)</span></span>
+<span class="line"><span>  if (property &amp;&amp; property.configurable === false) { return }</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  // 获取 getter 和 setter，并获取 val 值</span></span>
+<span class="line"><span>  const getter = property &amp;&amp; property.get</span></span>
+<span class="line"><span>  const setter = property &amp;&amp; property.set</span></span>
+<span class="line"><span>  if((!getter || setter) &amp;&amp; arguments.length === 2) { val = obj[key] }</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  // 递归处理，保证对象中所有 key 被观察</span></span>
+<span class="line"><span>  let childOb = observe(val)</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  Object.defineProperty(obj, key, {</span></span>
+<span class="line"><span>    enumerable: true,</span></span>
+<span class="line"><span>    configurable: true,</span></span>
+<span class="line"><span>    // get 劫持 obj[key] 的 进行依赖收集</span></span>
+<span class="line"><span>    get: function reactiveGetter() {</span></span>
+<span class="line"><span>      const value = getter ? getter.call(obj) : val</span></span>
+<span class="line"><span>      if(Dep.target) {</span></span>
+<span class="line"><span>        // 依赖收集</span></span>
+<span class="line"><span>        dep.depend()</span></span>
+<span class="line"><span>        if(childOb) {</span></span>
+<span class="line"><span>          // 针对嵌套对象，依赖收集</span></span>
+<span class="line"><span>          childOb.dep.depend()</span></span>
+<span class="line"><span>          // 触发数组响应式</span></span>
+<span class="line"><span>          if(Array.isArray(value)) {</span></span>
+<span class="line"><span>            dependArray(value)</span></span>
+<span class="line"><span>          }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>      }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    return value</span></span>
+<span class="line"><span>  })</span></span>
+<span class="line"><span>  // set 派发更新 obj[key]</span></span>
+<span class="line"><span>  set: function reactiveSetter(newVal) {</span></span>
+<span class="line"><span>    ...</span></span>
+<span class="line"><span>    if(setter) {</span></span>
+<span class="line"><span>      setter.call(obj, newVal)</span></span>
+<span class="line"><span>    } else {</span></span>
+<span class="line"><span>      val = newVal</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    // 新值设置响应式</span></span>
+<span class="line"><span>    childOb = observe(val)</span></span>
+<span class="line"><span>    // 依赖通知更新</span></span>
+<span class="line"><span>    dep.notify()</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>那 Vue3 为何会抛弃它呢？那肯定是有一些缺陷的。</p><p>主要原因：无法监听对象或数组新增、删除的元素。<br> Vue2 方案：针对常用数组原型方法<code>push</code>、<code>pop</code>、<code>shift</code>、<code>unshift</code>、<code>splice</code>、<code>sort</code>、<code>reverse</code>进行了 hack 处理；提供<code>Vue.set</code>监听对象 / 数组新增属性。对象的新增 / 删除响应，还可以<code>new</code>个新对象，新增则合并新属性和旧对象；删除则将删除属性后的对象深拷贝给新对象。</p><p><strong>Tips：</strong> <code>Object.defineOProperty</code>是可以监听数组已有元素，但 Vue2 没有提供的原因是<code>性能</code>问题，具体可看见<strong>参考</strong>第二篇 ~。</p><p>Proxy</p><p><code>Proxy</code>是 ES6 新特性，通过第 2 个参数<code>handler</code>拦截目标对象的行为。相较于<code>Object.defineProperty</code>提供语言全范围的响应能力，消除了局限性。但在兼容性上放弃了（IE11 以下）</p><p><strong>局限性</strong></p><ol><li><p>对象 / 数组的新增、删除。</p></li><li><p>监测. length 修改。</p></li><li><p>Map、Set、WeakMap、WeakSet 的支持。</p></li></ol><p>基本用法：创建对象的代理，从而实现基本操作的拦截和自定义操作。</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>const handler = {</span></span>
+<span class="line"><span>  get: function(obj, prop) {</span></span>
+<span class="line"><span>    return prop in obj ? obj[prop] : </span></span>
+<span class="line"><span>  },</span></span>
+<span class="line"><span>  set: function() {},</span></span>
+<span class="line"><span>  ...</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>搬运 Vue3 的源码 reactive.ts 文件</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>function createReactiveObject(target, isReadOnly, baseHandlers, collectionHandlers, proxyMap) {</span></span>
+<span class="line"><span>  ...</span></span>
+<span class="line"><span>  // collectionHandlers: 处理Map、Set、WeakMap、WeakSet</span></span>
+<span class="line"><span>  // baseHandlers: 处理数组、对象</span></span>
+<span class="line"><span>  const proxy = new Proxy(</span></span>
+<span class="line"><span>    target,</span></span>
+<span class="line"><span>    targetType === TargetType.COLLECTION ? collectionHandlers : baseHandlers</span></span>
+<span class="line"><span>  )</span></span>
+<span class="line"><span>  proxyMap.set(target, proxy)</span></span>
+<span class="line"><span>  return proxy</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>以 baseHandlers.ts 为例，使用 Reflect.get 而不是<code>target[key]</code>的原因是 receiver 参数可以把 this 指向 getter 调用时，而非 Proxy 构造时的对象。</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>// 依赖收集</span></span>
+<span class="line"><span>function createGetter(isReadonly = false, shallow = false) {</span></span>
+<span class="line"><span>  return function get(target: Target, key: string | symbol, receiver: object) {</span></span>
+<span class="line"><span>    ...</span></span>
+<span class="line"><span>    // 数组类型</span></span>
+<span class="line"><span>    const targetIsArray = isArray(target)</span></span>
+<span class="line"><span>    if (!isReadonly &amp;&amp; targetIsArray &amp;&amp; hasOwn(arrayInstrumentations, key)) {</span></span>
+<span class="line"><span>      return Reflect.get(arrayInstrumentations, key, receiver)</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    // 非数组类型</span></span>
+<span class="line"><span>    const res = Reflect.get(target, key, receiver);</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    // 对象递归调用</span></span>
+<span class="line"><span>    if (isObject(res)) {</span></span>
+<span class="line"><span>      return isReadonly ? readonly(res) : reactive(res)</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>    return res</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>// 派发更新</span></span>
+<span class="line"><span>function createSetter() {</span></span>
+<span class="line"><span>  return function set(target: Target, key: string | symbol, value: unknown, receiver: Object) {</span></span>
+<span class="line"><span>    value = toRaw(value)</span></span>
+<span class="line"><span>    oldValue = target[key]</span></span>
+<span class="line"><span>    // 因 ref 数据在 set value 时就已 trigger 依赖了，所以直接赋值 return 即可</span></span>
+<span class="line"><span>    if (!isArray(target) &amp;&amp; isRef(oldValue) &amp;&amp; !isRef(value)) {</span></span>
+<span class="line"><span>      oldValue.value = value</span></span>
+<span class="line"><span>      return true</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>    // 对象是否有 key 有 key set，无 key add</span></span>
+<span class="line"><span>    const hadKey = hasOwn(target, key)</span></span>
+<span class="line"><span>    const result = Reflect.set(target, key, value, receiver)</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    if (target === toRaw(receiver)) {</span></span>
+<span class="line"><span>      if (!hadKey) {</span></span>
+<span class="line"><span>        trigger(target, TriggerOpTypes.ADD, key, value)</span></span>
+<span class="line"><span>      } else if (hasChanged(value, oldValue)) {</span></span>
+<span class="line"><span>        trigger(target, TriggerOpTypes.SET, key, value, oldValue)</span></span>
+<span class="line"><span>      }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    return result</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="虚拟-dom" tabindex="-1"><a class="header-anchor" href="#虚拟-dom"><span><a href="https://so.csdn.net/so/search?q=%E8%99%9A%E6%8B%9FDOM&amp;spm=1001.2101.3001.7020" target="_blank" rel="noopener noreferrer">虚拟 DOM</a></span></a></h3><p>Vue3 相比于 Vue2 虚拟 DOM 上增加<code>patchFlag</code>字段。我们借助<code>Vue3 Template Explorer</code>来看。</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>&lt;div id=app&gt;</span></span>
+<span class="line"><span>  &lt;h1&gt;技术摸鱼&lt;/h1&gt;</span></span>
+<span class="line"><span>  &lt;p&gt;今天天气真不错&lt;/p&gt;</span></span>
+<span class="line"><span>  &lt;div&gt;{{name}}&lt;/div&gt;</span></span>
+<span class="line"><span>&lt;/div&gt;</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>渲染函数如下。</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>import { createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, openBlock as _openBlock, createElementBlock as _createElementBlock, pushScopeId as _pushScopeId, popScopeId as _popScopeId } from vue</span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>const _withScopeId = n =&gt; (_pushScopeId(scope-id),n=n(),_popScopeId(),n)</span></span>
+<span class="line"><span>const _hoisted_1 = { id: app }</span></span>
+<span class="line"><span>const _hoisted_2 = /*#__PURE__*/ _withScopeId(() =&gt; /*#__PURE__*/_createElementVNode(h1, null, 技术摸鱼, -1 /* HOISTED */))</span></span>
+<span class="line"><span>const _hoisted_3 = /*#__PURE__*/ _withScopeId(() =&gt; /*#__PURE__*/_createElementVNode(p, null, 今天天气真不错, -1 /* HOISTED */))</span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>export function render(_ctx, _cache, $props, $setup, $data, $options) {</span></span>
+<span class="line"><span>  return (_openBlock(), _createElementBlock(div, _hoisted_1, [</span></span>
+<span class="line"><span>    _hoisted_2,</span></span>
+<span class="line"><span>    _hoisted_3,</span></span>
+<span class="line"><span>    _createElementVNode(div, null, _toDisplayString(_ctx.name), 1 /* TEXT */)</span></span>
+<span class="line"><span>  ]))</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>注意第 3 个<code>_createElementVNode</code>的第 4 个参数即<code>patchFlag</code>字段类型，字段类型情况如下所示。1 代表节点为动态文本节点，那在 diff 过程中，只需比对文本对容，无需关注 class、style 等。除此之外，发现所有的静态节点，都保存为一个变量进行<code>静态提升</code>，可在重新渲染时直接引用，无需重新创建。</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>export const enum PatchFlags { </span></span>
+<span class="line"><span>  TEXT = 1, // 动态文本内容</span></span>
+<span class="line"><span>  CLASS = 1 &lt;&lt; 1, // 动态类名</span></span>
+<span class="line"><span>  STYLE = 1 &lt;&lt; 2, // 动态样式</span></span>
+<span class="line"><span>  PROPS = 1 &lt;&lt; 3, // 动态属性，不包含类名和样式</span></span>
+<span class="line"><span>  FULL_PROPS = 1 &lt;&lt; 4, // 具有动态 key 属性，当 key 改变，需要进行完整的 diff 比较</span></span>
+<span class="line"><span>  HYDRATE_EVENTS = 1 &lt;&lt; 5, // 带有监听事件的节点</span></span>
+<span class="line"><span>  STABLE_FRAGMENT = 1 &lt;&lt; 6, // 不会改变子节点顺序的 fragment</span></span>
+<span class="line"><span>  KEYED_FRAGMENT = 1 &lt;&lt; 7, // 带有 key 属性的 fragment 或部分子节点</span></span>
+<span class="line"><span>  UNKEYED_FRAGMENT = 1 &lt;&lt; 8,  // 子节点没有 key 的fragment</span></span>
+<span class="line"><span>  NEED_PATCH = 1 &lt;&lt; 9, // 只会进行非 props 的比较</span></span>
+<span class="line"><span>  DYNAMIC_SLOTS = 1 &lt;&lt; 10, // 动态的插槽</span></span>
+<span class="line"><span>  HOISTED = -1,  // 静态节点，diff阶段忽略其子节点</span></span>
+<span class="line"><span>  BAIL = -2 // 代表 diff 应该结束</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="事件缓存" tabindex="-1"><a class="header-anchor" href="#事件缓存"><span>事件缓存</span></a></h3><p>Vue3 的 <code>cacheHandler</code>可在第一次渲染后缓存我们的事件。相比于 Vue2 无需每次渲染都传递一个新函数。加一个<code>click</code>事件。</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>&lt;div id=app&gt;</span></span>
+<span class="line"><span>  &lt;h1&gt;技术摸鱼&lt;/h1&gt;</span></span>
+<span class="line"><span>  &lt;p&gt;今天天气真不错&lt;/p&gt;</span></span>
+<span class="line"><span>  &lt;div&gt;{{name}}&lt;/div&gt;</span></span>
+<span class="line"><span>  &lt;span onCLick=() =&gt; {}&gt;&lt;span&gt;</span></span>
+<span class="line"><span>&lt;/div&gt;</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>渲染函数如下</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>import { createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, openBlock as _openBlock, createElementBlock as _createElementBlock, pushScopeId as _pushScopeId, popScopeId as _popScopeId } from vue</span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>const _withScopeId = n =&gt; (_pushScopeId(scope-id),n=n(),_popScopeId(),n)</span></span>
+<span class="line"><span>const _hoisted_1 = { id: app }</span></span>
+<span class="line"><span>const _hoisted_2 = /*#__PURE__*/ _withScopeId(() =&gt; /*#__PURE__*/_createElementVNode(h1, null, 技术摸鱼, -1 /* HOISTED */))</span></span>
+<span class="line"><span>const _hoisted_3 = /*#__PURE__*/ _withScopeId(() =&gt; /*#__PURE__*/_createElementVNode(p, null, 今天天气真不错, -1 /* HOISTED */))</span></span>
+<span class="line"><span>const _hoisted_4 = /*#__PURE__*/ _withScopeId(() =&gt; /*#__PURE__*/_createElementVNode(span, { onCLick: () =&gt; {} }, [</span></span>
+<span class="line"><span>  /*#__PURE__*/_createElementVNode(span)</span></span>
+<span class="line"><span>], -1 /* HOISTED */))</span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>export function render(_ctx, _cache, $props, $setup, $data, $options) {</span></span>
+<span class="line"><span>  return (_openBlock(), _createElementBlock(div, _hoisted_1, [</span></span>
+<span class="line"><span>    _hoisted_2,</span></span>
+<span class="line"><span>    _hoisted_3,</span></span>
+<span class="line"><span>    _createElementVNode(div, null, _toDisplayString(_ctx.name), 1 /* TEXT */),</span></span>
+<span class="line"><span>    _hoisted_4</span></span>
+<span class="line"><span>  ]))</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="diff-优化" tabindex="-1"><a class="header-anchor" href="#diff-优化"><span>Diff 优化</span></a></h3><p>搬运 Vue3 patchChildren 源码。结合上文与源码，patchFlag 帮助 diff 时区分静态节点，以及不同类型的动态节点。一定程度地减少节点本身及其属性的比对。</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>function patchChildren(n1, n2, container, parentAnchor, parentComponent, parentSuspense, isSVG, optimized) {</span></span>
+<span class="line"><span>  // 获取新老孩子节点</span></span>
+<span class="line"><span>  const c1 = n1 &amp;&amp; n1.children</span></span>
+<span class="line"><span>  const c2 = n2.children</span></span>
+<span class="line"><span>  const prevShapeFlag = n1 ? n1.shapeFlag : 0</span></span>
+<span class="line"><span>  const { patchFlag, shapeFlag } = n2</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  // 处理 patchFlag 大于 0 </span></span>
+<span class="line"><span>  if(patchFlag &gt; 0) {</span></span>
+<span class="line"><span>    if(patchFlag &amp;&amp; PatchFlags.KEYED_FRAGMENT) {</span></span>
+<span class="line"><span>      // 存在 key</span></span>
+<span class="line"><span>      patchKeyedChildren()</span></span>
+<span class="line"><span>      return</span></span>
+<span class="line"><span>    } els if(patchFlag &amp;&amp; PatchFlags.UNKEYED_FRAGMENT) {</span></span>
+<span class="line"><span>      // 不存在 key</span></span>
+<span class="line"><span>      patchUnkeyedChildren()</span></span>
+<span class="line"><span>      return</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  // 匹配是文本节点（静态）：移除老节点，设置文本节点</span></span>
+<span class="line"><span>  if(shapeFlag &amp;&amp; ShapeFlags.TEXT_CHILDREN) {</span></span>
+<span class="line"><span>    if (prevShapeFlag &amp; ShapeFlags.ARRAY_CHILDREN) {</span></span>
+<span class="line"><span>      unmountChildren(c1 as VNode[], parentComponent, parentSuspense)</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    if (c2 !== c1) {</span></span>
+<span class="line"><span>      hostSetElementText(container, c2 as string)</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  } else {</span></span>
+<span class="line"><span>    // 匹配新老 Vnode 是数组，则全量比较；否则移除当前所有的节点</span></span>
+<span class="line"><span>    if (prevShapeFlag &amp; ShapeFlags.ARRAY_CHILDREN) {</span></span>
+<span class="line"><span>      if (shapeFlag &amp; ShapeFlags.ARRAY_CHILDREN) {</span></span>
+<span class="line"><span>        patchKeyedChildren(c1, c2, container, anchor, parentComponent, parentSuspense,...)</span></span>
+<span class="line"><span>      } else {</span></span>
+<span class="line"><span>        unmountChildren(c1 as VNode[], parentComponent, parentSuspense, true)</span></span>
+<span class="line"><span>      }</span></span>
+<span class="line"><span>    } else {</span></span>
+<span class="line"><span>      </span></span>
+<span class="line"><span>      if(prevShapeFlag &amp; ShapeFlags.TEXT_CHILDREN) {</span></span>
+<span class="line"><span>        hostSetElementText(container, )</span></span>
+<span class="line"><span>      } </span></span>
+<span class="line"><span>      if (shapeFlag &amp; ShapeFlags.ARRAY_CHILDREN) {</span></span>
+<span class="line"><span>        mountChildren(c2 as VNodeArrayChildren, container,anchor,parentComponent,...)</span></span>
+<span class="line"><span>      }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>patchUnkeyedChildren 源码如下。</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>function patchUnkeyedChildren(c1, c2, container, parentAnchor, parentComponent, parentSuspense, isSVG, optimized) {</span></span>
+<span class="line"><span>  c1 = c1 || EMPTY_ARR</span></span>
+<span class="line"><span>  c2 = c2 || EMPTY_ARR</span></span>
+<span class="line"><span>  const oldLength = c1.length</span></span>
+<span class="line"><span>  const newLength = c2.length</span></span>
+<span class="line"><span>  const commonLength = Math.min(oldLength, newLength)</span></span>
+<span class="line"><span>  let i</span></span>
+<span class="line"><span>  for(i = 0; i &lt; commonLength; i++) {</span></span>
+<span class="line"><span>    // 如果新 Vnode 已经挂载，则直接 clone 一份，否则新建一个节点</span></span>
+<span class="line"><span>    const nextChild = (c2[i] = optimized ? cloneIfMounted(c2[i] as Vnode)) : normalizeVnode(c2[i])</span></span>
+<span class="line"><span>    patch()</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  if(oldLength &gt; newLength) {</span></span>
+<span class="line"><span>    // 移除多余的节点</span></span>
+<span class="line"><span>    unmountedChildren()</span></span>
+<span class="line"><span>  } else {</span></span>
+<span class="line"><span>    // 创建新的节点</span></span>
+<span class="line"><span>    mountChildren()</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>patchKeyedChildren 源码如下，有运用最长递增序列的算法思想。</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>function patchKeyedChildren(c1, c2, container, parentAnchor, parentComponent, parentSuspense, isSVG, optimized) {</span></span>
+<span class="line"><span>  let i = 0;</span></span>
+<span class="line"><span>  const e1 = c1.length - 1</span></span>
+<span class="line"><span>  const e2 = c2.length - 1</span></span>
+<span class="line"><span>  const l2 = c2.length</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  // 从头开始遍历，若新老节点是同一节点，执行 patch 更新差异；否则，跳出循环 </span></span>
+<span class="line"><span>  while(i &lt;= e1 &amp;&amp; i &lt;= e2) {</span></span>
+<span class="line"><span>    const n1 = c1[i]</span></span>
+<span class="line"><span>    const n2 = c2[i]</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    if(isSameVnodeType) {</span></span>
+<span class="line"><span>      patch(n1, n2, container, parentAnchor, parentComponent, parentSuspense, isSvg, optimized)</span></span>
+<span class="line"><span>    } else {</span></span>
+<span class="line"><span>      break</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    i++</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  // 从尾开始遍历，若新老节点是同一节点，执行 patch 更新差异；否则，跳出循环 </span></span>
+<span class="line"><span>  while(i &lt;= e1 &amp;&amp; i &lt;= e2) {</span></span>
+<span class="line"><span>    const n1 = c1[e1]</span></span>
+<span class="line"><span>    const n2 = c2[e2]</span></span>
+<span class="line"><span>    if(isSameVnodeType) {</span></span>
+<span class="line"><span>      patch(n1, n2, container, parentAnchor, parentComponent, parentSuspense, isSvg, optimized)</span></span>
+<span class="line"><span>    } else {</span></span>
+<span class="line"><span>      break</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    e1--</span></span>
+<span class="line"><span>    e2--</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  // 仅存在需要新增的节点</span></span>
+<span class="line"><span>  if(i &gt; e1) {    </span></span>
+<span class="line"><span>    if(i &lt;= e2) {</span></span>
+<span class="line"><span>      const nextPos = e2 + 1</span></span>
+<span class="line"><span>      const anchor = nextPos &lt; l2 ? c2[nextPos] : parentAnchor</span></span>
+<span class="line"><span>      while(i &lt;= e2) {</span></span>
+<span class="line"><span>        patch(null, c2[i], container, parentAnchor, parentComponent, parentSuspense, isSvg, optimized)</span></span>
+<span class="line"><span>      }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  // 仅存在需要删除的节点</span></span>
+<span class="line"><span>  else if(i &gt; e2) {</span></span>
+<span class="line"><span>    while(i &lt;= e1) {</span></span>
+<span class="line"><span>      unmount(c1[i], parentComponent, parentSuspense, true)    </span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  // 新旧节点均未遍历完</span></span>
+<span class="line"><span>  // [i ... e1 + 1]: a b [c d e] f g</span></span>
+<span class="line"><span>  // [i ... e2 + 1]: a b [e d c h] f g</span></span>
+<span class="line"><span>  // i = 2, e1 = 4, e2 = 5</span></span>
+<span class="line"><span>  else {</span></span>
+<span class="line"><span>    const s1 = i</span></span>
+<span class="line"><span>    const s2 = i</span></span>
+<span class="line"><span>    // 缓存新 Vnode 剩余节点 上例即{e: 2, d: 3, c: 4, h: 5}</span></span>
+<span class="line"><span>    const keyToNewIndexMap = new Map()</span></span>
+<span class="line"><span>    for (i = s2; i &lt;= e2; i++) {</span></span>
+<span class="line"><span>      const nextChild = (c2[i] = optimized</span></span>
+<span class="line"><span>          ? cloneIfMounted(c2[i] as VNode)</span></span>
+<span class="line"><span>          : normalizeVNode(c2[i]))</span></span>
+<span class="line"><span>      </span></span>
+<span class="line"><span>      if (nextChild.key != null) {</span></span>
+<span class="line"><span>        if (__DEV__ &amp;&amp; keyToNewIndexMap.has(nextChild.key)) {</span></span>
+<span class="line"><span>          warn(</span></span>
+<span class="line"><span>            `Duplicate keys found during update:`,</span></span>
+<span class="line"><span>             JSON.stringify(nextChild.key),</span></span>
+<span class="line"><span>            `Make sure keys are unique.`</span></span>
+<span class="line"><span>          )</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        keyToNewIndexMap.set(nextChild.key, i)</span></span>
+<span class="line"><span>      }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  let j = 0</span></span>
+<span class="line"><span>  // 记录即将 patch 的 新 Vnode 数量</span></span>
+<span class="line"><span>  let patched = 0</span></span>
+<span class="line"><span>  // 新 Vnode 剩余节点长度</span></span>
+<span class="line"><span>  const toBePatched = e2 - s2 + 1</span></span>
+<span class="line"><span>  // 是否移动标识</span></span>
+<span class="line"><span>  let moved = false</span></span>
+<span class="line"><span>  let maxNewindexSoFar = 0</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  // 初始化 新老节点的对应关系（用于后续最大递增序列算法）</span></span>
+<span class="line"><span>  const newIndexToOldIndexMap = new Array(toBePatched)</span></span>
+<span class="line"><span>  for (i = 0; i &lt; toBePatched; i++) newIndexToOldIndexMap[i] = 0</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  // 遍历老 Vnode 剩余节点</span></span>
+<span class="line"><span>  for (i = s1; i &lt;= e1; i++) {</span></span>
+<span class="line"><span>    const prevChild = c1[i]</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    // 代表当前新 Vnode 都已patch，剩余旧 Vnode 移除即可</span></span>
+<span class="line"><span>    if (patched &gt;= toBePatched) {</span></span>
+<span class="line"><span>      unmount(prevChild, parentComponent, parentSuspense, true)</span></span>
+<span class="line"><span>      continue</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    </span></span>
+<span class="line"><span>    let newIndex</span></span>
+<span class="line"><span>    // 旧 Vnode 存在 key，则从 keyToNewIndexMap 获取</span></span>
+<span class="line"><span>    if (prevChild.key != null) {</span></span>
+<span class="line"><span>      newIndex = keyToNewIndexMap.get(prevChild.key)</span></span>
+<span class="line"><span>    // 旧 Vnode 不存在 key，则遍历新 Vnode 获取</span></span>
+<span class="line"><span>    } else {</span></span>
+<span class="line"><span>      for (j = s2; j &lt;= e2; j++) {</span></span>
+<span class="line"><span>        if (newIndexToOldIndexMap[j - s2] === 0 &amp;&amp; isSameVNodeType(prevChild, c2[j] as VNode)){</span></span>
+<span class="line"><span>           newIndex = j</span></span>
+<span class="line"><span>           break</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>      }           </span></span>
+<span class="line"><span>   }</span></span>
+<span class="line"><span>   </span></span>
+<span class="line"><span>   // 删除、更新节点</span></span>
+<span class="line"><span>   // 新 Vnode 没有 当前节点，移除</span></span>
+<span class="line"><span>   if (newIndex === undefined) {</span></span>
+<span class="line"><span>     unmount(prevChild, parentComponent, parentSuspense, true)</span></span>
+<span class="line"><span>   } else {</span></span>
+<span class="line"><span>     // 旧 Vnode 的下标位置 + 1，存储到对应 新 Vnode 的 Map 中</span></span>
+<span class="line"><span>     // + 1 处理是为了防止数组首位下标是 0 的情况，因为这里的 0 代表需创建新节点</span></span>
+<span class="line"><span>     newIndexToOldIndexMap[newIndex - s2] = i + 1</span></span>
+<span class="line"><span>     </span></span>
+<span class="line"><span>     // 若不是连续递增，则代表需要移动</span></span>
+<span class="line"><span>     if (newIndex &gt;= maxNewIndexSoFar) {</span></span>
+<span class="line"><span>       maxNewIndexSoFar = newIndex</span></span>
+<span class="line"><span>     } else {</span></span>
+<span class="line"><span>       moved = true</span></span>
+<span class="line"><span>     }</span></span>
+<span class="line"><span>     </span></span>
+<span class="line"><span>     patch(prevChild,c2[newIndex],...)</span></span>
+<span class="line"><span>     patched++</span></span>
+<span class="line"><span>   }</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  // 遍历结束，newIndexToOldIndexMap = {0:5, 1:4, 2:3, 3:0}</span></span>
+<span class="line"><span>  // 新建、移动节点</span></span>
+<span class="line"><span>  const increasingNewIndexSequence = moved</span></span>
+<span class="line"><span>  // 获取最长递增序列</span></span>
+<span class="line"><span>  ? getSequence(newIndexToOldIndexMap)</span></span>
+<span class="line"><span>  : EMPTY_ARR</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  j = increasingNewIndexSequence.length - 1</span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>  for (i = toBePatched - 1; i &gt;= 0; i--) {</span></span>
+<span class="line"><span>    const nextIndex = s2 + i</span></span>
+<span class="line"><span>    const nextChild = c2[nextIndex] as VNode</span></span>
+<span class="line"><span>    const anchor = extIndex + 1 &lt; l2 ? (c2[nextIndex + 1] as VNode).el : parentAnchor</span></span>
+<span class="line"><span>    // 0 新建 Vnode</span></span>
+<span class="line"><span>    if (newIndexToOldIndexMap[i] === 0) {</span></span>
+<span class="line"><span>      patch(null,nextChild,...)</span></span>
+<span class="line"><span>    } else if (moved) {</span></span>
+<span class="line"><span>      // 移动节点</span></span>
+<span class="line"><span>      if (j &lt; 0 || i !== increasingNewIndexSequence[j]) {</span></span>
+<span class="line"><span>        move(nextChild, container, anchor, MoveType.REORDER)</span></span>
+<span class="line"><span>      } else {</span></span>
+<span class="line"><span>        j--</span></span>
+<span class="line"><span>      }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="打包优化" tabindex="-1"><a class="header-anchor" href="#打包优化"><span>打包优化</span></a></h3><blockquote><p>tree-shaking：模块打包<code>webpack</code>、<code>rollup</code>等中的概念。移除 JavaScript 上下文中未引用的代码。主要依赖于<code>import</code>和<code>export</code>语句，用来检测代码模块是否被导出、导入，且被 JavaScript 文件使用。</p></blockquote><p>以<code>nextTick</code>为例子，在 Vue2 中，全局 API 暴露在 Vue 实例上，即使未使用，也无法通过<code>tree-shaking</code>进行消除。</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>import Vue from  vue </span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>Vue.nextTick(() =&gt; {</span></span>
+<span class="line"><span>  // 一些和DOM有关的东西</span></span>
+<span class="line"><span>})</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Vue3 中针对全局 和内部的 API 进行了重构，并考虑到<code>tree-shaking</code>的支持。因此，全局 API 现在只能作为 ES 模块构建的命名导出进行访问。</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>import { nextTick } from  vue </span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>nextTick(() =&gt; {</span></span>
+<span class="line"><span>  // 一些和DOM有关的东西</span></span>
+<span class="line"><span>})</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>通过这一更改，只要模块绑定器支持<code>tree-shaking</code>，则 Vue 应用程序中未使用的 api 将从最终的捆绑包中消除，获得最佳文件大小。受此更改影响的全局 API 有如下。</p><ul><li><p>Vue.nextTick</p></li><li><p>Vue.observable （用 Vue.reactive 替换）</p></li><li><p>Vue.version</p></li><li><p>Vue.compile （仅全构建）</p></li><li><p>Vue.set （仅兼容构建）</p></li><li><p>Vue.delete （仅兼容构建）</p></li></ul><p>内部 API 也有诸如 transition、v-model 等标签或者指令被命名导出。只有在程序真正使用才会被捆绑打包。</p><p>根据 尤大 直播可以知道如今 Vue3 将所有运行功能打包也只有<code>22.5kb</code>，比 Vue2 轻量很多。</p><h3 id="自定义渲染-api" tabindex="-1"><a class="header-anchor" href="#自定义渲染-api"><span>自定义渲染 API</span></a></h3><p>Vue3 提供的<code>createApp</code>默认是将 template 映射成 html。但若想生成<code>canvas</code>时，就需要使用<code>custom renderer api</code>自定义 render 生成函数。</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>// 自定义runtime-render函数</span></span>
+<span class="line"><span>import { createApp } from  ./runtime-render </span></span>
+<span class="line"><span>import App from  ./src/App </span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>createApp(App).mount( #app )</span></span>
+<span class="line"><span>复制代码</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="typescript-支持" tabindex="-1"><a class="header-anchor" href="#typescript-支持"><span><a href="https://so.csdn.net/so/search?q=TypeScript&amp;spm=1001.2101.3001.7020" target="_blank" rel="noopener noreferrer">TypeScript</a> 支持</span></a></h3><p>Vue3 由 TS 重写，相对于 Vue2 有更好地<code>TypeScript</code>支持。</p><ul><li><p>Vue2 <code>Option API</code>中 option 是个简单对象，而 TS 是一种类型系统，面向对象的语法，不是特别匹配。</p></li><li><p>Vue2 需要<code>vue-class-component</code>强化 vue 原生组件，也需要<code>vue-property-decorator</code>增加更多结合 Vue 特性的装饰器，写法比较繁琐。</p></li></ul></div><!----><footer class="vp-page-meta"><div class="vp-meta-item edit-link"><a class="auto-link external-link vp-meta-label" href="https://github.com/tommmmya//edit/main/src/study/3.Vue/vue3.0和 2.0的区别.md" aria-label="在 GitHub 上编辑此页" rel="noopener noreferrer" target="_blank"><!--[--><svg xmlns="http://www.w3.org/2000/svg" class="icon edit-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="edit icon" name="edit"><path d="M430.818 653.65a60.46 60.46 0 0 1-50.96-93.281l71.69-114.012 7.773-10.365L816.038 80.138A60.46 60.46 0 0 1 859.225 62a60.46 60.46 0 0 1 43.186 18.138l43.186 43.186a60.46 60.46 0 0 1 0 86.373L588.879 565.55l-8.637 8.637-117.466 68.234a60.46 60.46 0 0 1-31.958 11.229z"></path><path d="M728.802 962H252.891A190.883 190.883 0 0 1 62.008 771.98V296.934a190.883 190.883 0 0 1 190.883-192.61h267.754a60.46 60.46 0 0 1 0 120.92H252.891a69.962 69.962 0 0 0-69.098 69.099V771.98a69.962 69.962 0 0 0 69.098 69.098h475.911A69.962 69.962 0 0 0 797.9 771.98V503.363a60.46 60.46 0 1 1 120.922 0V771.98A190.883 190.883 0 0 1 728.802 962z"></path></svg><!--]-->在 GitHub 上编辑此页<!----></a></div><div class="vp-meta-item git-info"><div class="update-time"><span class="vp-meta-label">上次编辑于: </span><!----></div><div class="contributors"><span class="vp-meta-label">贡献者: </span><!--[--><!--[--><span class="vp-meta-info" title="email: tangmao02@meituan.com">tangmao02</span><!--]--><!--]--></div></div></footer><nav class="vp-page-nav"><a class="route-link auto-link prev" href="/Tommya-Blog/study/3.Vue/Vue.use%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88.html" aria-label="Vue.use()详解"><div class="hint"><span class="arrow start"></span>上一页</div><div class="link"><span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span>Vue.use()详解</div></a><a class="route-link auto-link next" href="/Tommya-Blog/study/3.Vue/vue2-vue3%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86.html" aria-label="vue2 和 vue3响应式原理区别"><div class="hint">下一页<span class="arrow end"></span></div><div class="link">vue2 和 vue3响应式原理区别<span class="font-icon icon fa-fw fa-sm fas fa-pen-to-square" style=""></span></div></a></nav><!----><!----><!--]--></main><!--]--><footer class="vp-footer-wrapper"><div class="vp-footer">Mr.Tommya</div><div class="vp-copyright">Copyright © 2024 Mr.Tommya </div></footer></div><!--]--><!--[--><!----><!--]--><!--]--></div>
+    <script type="module" src="/Tommya-Blog/assets/app-hlFOVmMU.js" defer></script>
+  </body>
+</html>
