@@ -1,7 +1,7 @@
 ---
 icon: circle-info
 cover: /assets/images/cover3.jpg
-date: 2022-01-10
+date: 2024-01-10
 ---
 
 # 介绍页
@@ -10,4 +10,4 @@ date: 2022-01-10
 
 ### 微信号： `weixinhao03217`
 ### 手机号： `13699616276`
-### Email `1807797481`
+### Email `1807797481@qq.com`

@@ -1,6 +1,6 @@
 ---
 icon: pen-to-square
-date: 2022-01-11
+date: 2023-07-12
 category:
   - JavaScript
 tag:
