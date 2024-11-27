@@ -13,7 +13,7 @@ export default hopeTheme({
 
   iconAssets: "fontawesome-with-brands",
 
-  logo: "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oYAY8xIgCGAemDslAG9dKEb7AvnoACAQsAflIl~noop.jpeg?biz_tag=pcweb_cover&from=327834062&s=PackSourceEnum_SEARCH&se=false&x-expires=1731312000&x-signature=VBC0QySOAlwMA0ceRFHZYcvexfY%3D",
+  logo: "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=963216841,3381018131&fm=253&gp=0.jpg",
 
   repo: "tommmmya/",
 

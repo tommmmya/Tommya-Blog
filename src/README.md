@@ -3,7 +3,7 @@ home: true
 layout: BlogHome
 icon: home
 title: Tommya
-heroImage: https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oYAY8xIgCGAemDslAG9dKEb7AvnoACAQsAflIl~noop.jpeg?biz_tag=pcweb_cover&from=327834062&s=PackSourceEnum_SEARCH&se=false&x-expires=1732604400&x-signature=OU9YbPoR9UMraeyP0Smg87jqJZQ%3D
+heroImage: https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=963216841,3381018131&fm=253&gp=0.jpg
 heroText: Tommya Blog
 heroFullScreen: true
 tagline: 红日挂枝头，再谈来时路
